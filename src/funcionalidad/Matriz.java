@@ -14,4 +14,13 @@ public class Matriz {
 		this.categorias = categorias;
 	}
 	
+	/**
+	 * @param columnaPatron	Es la columna en la cual se buscara el valorPatron
+	 * @param valorPatron	Es el valor por el cual se obtendran los valores de las otras columnas
+	 * @return
+	 */
+	public Matriz obtenerSubMatriz(Columna columnaPatron, String valorPatron){
+		return null;
+	}	
+	
 }
