@@ -11,4 +11,10 @@ public class ResultadoFinal extends Resultado{
 		this.categoria = categoria;
 	}
 
+	public ResultadoFinal(String nombreColumna, String valorColumna,
+			String categoria) {
+		super(nombreColumna, valorColumna);
+		this.categoria = categoria;
+	}
+
 }

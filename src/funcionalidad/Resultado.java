@@ -8,6 +8,12 @@ public abstract class Resultado {
 		return nombreColumna;
 	}
 	
+	public Resultado(String nombreColumna, String valorColumna) {
+		super();
+		this.nombreColumna = nombreColumna;
+		this.valorColumna = valorColumna;
+	}
+
 	public void setNombreColumna(String nombreColumna) {
 		this.nombreColumna = nombreColumna;
 	}
