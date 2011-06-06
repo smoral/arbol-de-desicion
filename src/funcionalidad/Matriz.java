@@ -3,7 +3,7 @@ package funcionalidad;
 import java.util.Vector;
 
 public class Matriz {
-	private Vector<Columna> columnas;
+	private Vector<Columna> columnas = new Vector<Columna>();
 	private Columna categorias;
 	private Columna columnaMayorGanancia;
 
@@ -20,8 +20,14 @@ public class Matriz {
 	public void agregarColumnaCategoria(Columna categorias) {
 		this.categorias = categorias;
 	}
-
 	
+	public Columna obtenerColumna(String nombreColumna){
+		for (Columna col : columnas) {
+			if (col.getNombre().equals(nombreColumna));
+			return col;
+		}
+		return null;
+	}	
 
 	public Vector<Resultado> obtenerResultados() {
 		procesarGananciaInformacionDeColumnas();
@@ -128,7 +134,7 @@ public class Matriz {
 				entropiaDeCategorias += entropiaParcial;
 			}
 		}
-		return entropiaDeCategorias;
+		return -entropiaDeCategorias;
 	}
 
 	/**

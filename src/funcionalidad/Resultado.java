@@ -14,6 +14,8 @@ public abstract class Resultado {
 		this.valorColumna = valorColumna;
 	}
 
+	public Resultado() {}
+
 	public void setNombreColumna(String nombreColumna) {
 		this.nombreColumna = nombreColumna;
 	}

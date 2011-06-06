@@ -7,6 +7,19 @@ public class Columna {
 	private Vector<String> valores;
 	private float gananciaDeInformacion;
 
+	public void agregarValor (String valor){
+		valores.add(valor);
+	}
+	
+	public Columna(String nombre) {
+		this.valores = new Vector<String>();
+		this.nombre = nombre;
+	}
+
+	public Columna() {
+		this.valores = new Vector<String>();
+	}
+
 	public float getGananciaDeInformacion() {
 		return gananciaDeInformacion;
 	}
@@ -29,6 +42,10 @@ public class Columna {
 
 	public void setValores(Vector<String> valores) {
 		this.valores = valores;
+	}
+	
+	public String obtenerValor (int fila){
+		return valores.elementAt(fila);
 	}
 
 	/**
@@ -57,7 +74,7 @@ public class Columna {
 				cantidadOcurrencias++;
 			}
 		}
-		return 0;
+		return cantidadOcurrencias;
 	}
 
 	/**
@@ -101,7 +118,7 @@ public class Columna {
 				cantidadOcurrencias++;
 			}
 		}
-		return 0;
+		return cantidadOcurrencias;
 	}
 
 	/**

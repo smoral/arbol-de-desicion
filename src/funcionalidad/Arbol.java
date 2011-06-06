@@ -9,7 +9,11 @@ public class Arbol extends Resultado {
 	public Arbol(String nombreColumna, String valorColumna, Matriz matriz) {
 		super(nombreColumna, valorColumna);
 		this.matriz = matriz;
-		// TODO Auto-generated constructor stub
+	}
+
+	public Arbol(Matriz matriz) {
+		super();
+		this.matriz = matriz;
 	}
 
 	public String obtenerCategoria(Matriz matrizDeDatos) {
@@ -24,7 +28,12 @@ public class Arbol extends Resultado {
 		 * Resultado con ese valor y aplicando el metodo obtenerCategoria a ese
 		 * Resultado
 		 */
-
+		String valorColumnaMayorGanancia = matrizDeDatos.obtenerColumna(matriz.getColumnaMayorGanancia().getNombre()).obtenerValor(0);
+		for (Resultado resultado : resultados) {
+			if (resultado.getValorColumna().equals(valorColumnaMayorGanancia)){
+				return resultado.obtenerCategoria(matrizDeDatos);
+			} 
+		}
 		return null;
 	}
 
