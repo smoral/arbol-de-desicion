@@ -7,10 +7,10 @@ public class Columna {
 	private Vector<String> valores;
 	private float gananciaDeInformacion;
 
-	public void agregarValor (String valor){
+	public void agregarValor(String valor) {
 		valores.add(valor);
 	}
-	
+
 	public Columna(String nombre) {
 		this.valores = new Vector<String>();
 		this.nombre = nombre;
@@ -43,8 +43,8 @@ public class Columna {
 	public void setValores(Vector<String> valores) {
 		this.valores = valores;
 	}
-	
-	public String obtenerValor (int fila){
+
+	public String obtenerValor(int fila) {
 		return valores.elementAt(fila);
 	}
 
@@ -123,11 +123,15 @@ public class Columna {
 
 	/**
 	 * @param filas
+	 * @param simplificar
+	 *            Indica si se quiere obtener un solo valor cuando todos los
+	 *            valores son iguales
 	 * @return Devuelve los valores de de la columna para las filas indicadas,
-	 *         si existe un solo valor para todas las filas, se devuelve un
+	 *         si existe un solo valor para todas las filas y se quiere simplificar se devuelve un
 	 *         vector con este unico valor
 	 */
-	public Vector<String> obtenerValoresPorFilas(Vector<Integer> filas) {
+	public Vector<String> obtenerValoresPorFilas(Vector<Integer> filas,
+			boolean simplificar) {
 		Vector<String> valoresPorFilas = new Vector<String>();
 		boolean existeUnaSolaCategoria = true;
 		String valor = null;
@@ -140,7 +144,7 @@ public class Columna {
 				}
 			}
 		}
-		if (existeUnaSolaCategoria) {
+		if (existeUnaSolaCategoria && simplificar) {
 			valoresPorFilas = new Vector<String>();
 			valoresPorFilas.add(valor);
 		}

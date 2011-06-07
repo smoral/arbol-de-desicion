@@ -38,7 +38,7 @@ public class inicio {
 		colNueva = new Columna("dia");
 		colNueva.agregarValor("lunes");
 		colNueva.agregarValor("miercoles");
-		colNueva.agregarValor("jueves");
+		colNueva.agregarValor("lunes");
 		matrizInicial.agregarColumna(colNueva);
 
 		//COLUMNA ESTACION
@@ -79,7 +79,7 @@ public class inicio {
 		matrizDeDatos.agregarColumna(colNueva);
 
 		colNueva = new Columna("estacion");
-		colNueva.agregarValor("primavera");
+		colNueva.agregarValor("invierno");
 		matrizDeDatos.agregarColumna(colNueva);
 
 		colNueva = new Columna("viento");
