@@ -20,14 +20,15 @@ public class Matriz {
 	public void agregarColumnaCategoria(Columna categorias) {
 		this.categorias = categorias;
 	}
-	
-	public Columna obtenerColumna(String nombreColumna){
+
+	public Columna obtenerColumna(String nombreColumna) {
 		for (Columna col : columnas) {
-			if (col.getNombre().equals(nombreColumna));
-			return col;
+			if (col.getNombre().equals(nombreColumna)) {
+				return col;
+			}
 		}
 		return null;
-	}	
+	}
 
 	public Vector<Resultado> obtenerResultados() {
 		procesarGananciaInformacionDeColumnas();
@@ -36,7 +37,7 @@ public class Matriz {
 				.obtenerValoresPosibles()) {
 			resultados.add(obtenerResultado(valorPosible));
 		}
-		return null;
+		return resultados;
 
 	}
 
@@ -51,35 +52,46 @@ public class Matriz {
 		Resultado resultado = null;
 		Vector<Integer> filas = columnaMayorGanancia
 				.obtenerFilasEnColumna(valorPosible);
-		Vector<String> valoresPorFila = categorias
-				.obtenerValoresPorFilas(filas);
+		Vector<String> valoresPorFila = categorias.obtenerValoresPorFilas(
+				filas, true);
 		if (valoresPorFila.size() == 1) {
 			resultado = new ResultadoFinal(columnaMayorGanancia.getNombre(),
 					valorPosible, valoresPorFila.firstElement());
 		} else {
-			Matriz subMatriz = generarSubMatriz(filas);
+			Matriz subMatriz = generarSubMatriz(filas,
+					columnaMayorGanancia.getNombre());
 			resultado = new Arbol(columnaMayorGanancia.getNombre(),
 					valorPosible, subMatriz);
 		}
 		return resultado;
 	}
-	
+
 	/**
-	 * Devuelve una matriz a partir de las filas pasadas sin meter la de mayor ganancia
+	 * Devuelve una matriz a partir de las filas pasadas sin meter la de mayor
+	 * ganancia
+	 * 
 	 * @param filas
+	 * @param nombreColumnaPatron
+	 *            indica a partir de que columna se desea obtener los valores de
+	 *            las demas, esta no ingresa en la subMatriz
 	 * @return
 	 */
-	public Matriz generarSubMatriz(Vector<Integer> filas) {
+	public Matriz generarSubMatriz(Vector<Integer> filas,
+			String nombreColumnaPatron) {
 		Matriz subMatriz = new Matriz();
 		for (Columna columna : columnas) {
-			Columna columnaNueva = new Columna();
-			columnaNueva.setNombre(columna.getNombre());
-			columnaNueva.setValores(columna.obtenerValoresPorFilas(filas));			
-			subMatriz.agregarColumna(columnaNueva);			
+			if (!columna.getNombre().equals(nombreColumnaPatron)) {
+				Columna columnaNueva = new Columna();
+				columnaNueva.setNombre(columna.getNombre());
+				columnaNueva.setValores(columna.obtenerValoresPorFilas(filas,
+						false));
+				subMatriz.agregarColumna(columnaNueva);
+			}
 		}
 		Columna categoriasNuevas = new Columna();
 		categoriasNuevas.setNombre(categorias.getNombre());
-		categoriasNuevas.setValores(categorias.obtenerValoresPorFilas(filas));
+		categoriasNuevas.setValores(categorias.obtenerValoresPorFilas(filas,
+				false));
 		subMatriz.agregarColumnaCategoria(categoriasNuevas);
 		return subMatriz;
 	}
@@ -89,7 +101,7 @@ public class Matriz {
 	 * cual es la de mayor ganancia
 	 */
 	private void procesarGananciaInformacionDeColumnas() {
-		float entropiaDeLasCategorias = calcularEntorpiaDeCategorias();
+		float entropiaDeLasCategorias = calcularEntropiaDeCategorias();
 		for (Columna columna : columnas) {
 			float sumatoriaEntropias = 0; // es el segundo termino de la funcion
 											// de Ganancia de Informacion
@@ -119,7 +131,7 @@ public class Matriz {
 	 * 
 	 * @return
 	 */
-	private float calcularEntorpiaDeCategorias() {
+	private float calcularEntropiaDeCategorias() {
 		if (entropiaDeCategorias == 0) {
 			for (String categoria : categorias.obtenerValoresPosibles()) {
 				float cantidadOcurrenciasValorEnCategorias = categorias
@@ -129,12 +141,12 @@ public class Matriz {
 						/ cantidadFilasEnCategoria;
 				float logaritmo = (float) (Math
 						.log10(probabilidadDelValorEnCategoria) / Math.log10(2));
-				float entropiaParcial = probabilidadDelValorEnCategoria
+				float entropiaParcial = -probabilidadDelValorEnCategoria
 						* logaritmo;
 				entropiaDeCategorias += entropiaParcial;
 			}
 		}
-		return -entropiaDeCategorias;
+		return entropiaDeCategorias;
 	}
 
 	/**
@@ -162,7 +174,7 @@ public class Matriz {
 				float logaritmo = (float) (Math
 						.log10(probabilidadDelValorSegunCategoria) / Math
 						.log10(2));
-				float entropiaParcial = probabilidadDelValorSegunCategoria
+				float entropiaParcial = -probabilidadDelValorSegunCategoria
 						* logaritmo;
 				entropiaTotal += entropiaParcial;
 			}
