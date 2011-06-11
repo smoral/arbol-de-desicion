@@ -4,7 +4,7 @@ import java.util.Vector;
 
 public class Matriz {
 	private Vector<Columna> columnas = new Vector<Columna>();
-	private Columna categorias;
+	private Columna categorias = new Columna();
 	private Columna columnaMayorGanancia;
 
 	public Columna getColumnaMayorGanancia() {
@@ -12,6 +12,14 @@ public class Matriz {
 	}
 
 	private float entropiaDeCategorias = 0;
+
+	public Columna getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(Columna categorias) {
+		this.categorias = categorias;
+	}
 
 	public void agregarColumna(Columna col) {
 		columnas.add(col);
