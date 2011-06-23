@@ -20,7 +20,6 @@ public class Arbol extends Resultado {
 		if (resultados == null) {
 			procesarResultados();
 		}
-		// TODO Hay que devolver la categoria (CANOTTO90)
 		/*
 		 * obteniendo la columna con mayor ganacia de la matriz del arbol, se busca en la matriz
 		 * de datos el valor que esta columna tiene y a partir de este valor se
