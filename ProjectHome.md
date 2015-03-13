@@ -1,0 +1,1 @@
+Se utiliza el algoritmo Arbol de Desicion de DataMining para categorizar a una matriz con atributos de algun objeto en particular
